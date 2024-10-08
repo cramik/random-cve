@@ -4,21 +4,34 @@
     <title>Random CVE Line</title>
     <style>
         body {
+            position: absolute;
+            background: #282828;
             font-family: Arial, sans-serif;
             text-align: center;
-            margin-top: 50px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
         }
         #random-line {
             font-size: 1.5em;
             margin-top: 20px;
+        }
+        
+        button {
+            color: black;
+        }
+        
+        * {
+            color: white;
         }
     </style>
 </head>
 <body>
 
     <h1>Random CVE Line</h1>
-    <button id="get-random-line-btn">Get Random Line</button>
+    <button id="get-random-line-btn">Get Random CVE</button>
     <p id="random-line"></p>
+    <a href="" target="_blank" id="learn-link"></a>
 
     <script>
     async function getRandomLine() {
@@ -33,6 +46,8 @@
                 const randomLine = lines[Math.floor(Math.random() * lines.length)];
                 
                 document.getElementById('random-line').innerText = randomLine;
+                document.getElementById('learn-link').href = "https://nvd.nist.gov/vuln/detail/"+randomLine;
+                document.getElementById('learn-link').innerText = "Learn about "+randomLine;
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('random-line').innerText = 'Could not fetch the file.';
