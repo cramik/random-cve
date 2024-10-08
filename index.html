@@ -23,7 +23,7 @@
     <script>
     async function getRandomLine() {
             try {
-                const response = await fetch('static/cves.txt');
+                const response = await fetch('cves.txt');
                 if (!response.ok) {
                     throw new Error('Failed to fetch file');
                 }
