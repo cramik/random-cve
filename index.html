@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Random CVE Line</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #random-line {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Random CVE Line</h1>
+    <button id="get-random-line-btn">Get Random Line</button>
+    <p id="random-line"></p>
+
+    <script>
+    async function getRandomLine() {
+            try {
+                const response = await fetch('static/cves.txt');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch file');
+                }
+                
+                const data = await response.text();
+                const lines = data.split('\n').filter(line => line.trim() !== '');
+                const randomLine = lines[Math.floor(Math.random() * lines.length)];
+                
+                document.getElementById('random-line').innerText = randomLine;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('random-line').innerText = 'Could not fetch the file.';
+            }
+        }
+
+        document.getElementById('get-random-line-btn').addEventListener('click', getRandomLine);
+    </script>
+
+</body>
+</html>
